@@ -2,6 +2,8 @@
 
 ------
 
+[TOC]
+
 ## 接口简介
 
 本文档系新版快跑者（2017 年版）第三方开放接口文档，任何快跑者商户都拥有快跑者第三方开放接口调用权限！
@@ -29,8 +31,9 @@ ___
 
 **注：**
 
-+ PHP 开发者可从 https://github.com 获取 **Keloop-PHP-SDK**；
++ PHP 开发者可直接获取 [Keloop-PHP-SDK](https://github.com/LingdianIT-Com/keloop/blob/master/src/Keloop-PHP-SDK/KeloopSdk.php)；
 + .NET、JAVA 开发者请参考支付宝接口中的 [加签验签 SDK](https://doc.open.alipay.com/doc2/detail?treeId=54&articleId=103419&docType=1) 组装数据生成 **sign**；
++ 开发者也可参考 [签名与验签说明](#%E9%99%84%E7%AD%BE%E5%90%8D%E4%B8%8E%E9%AA%8C%E7%AD%BE%E8%AF%B4%E6%98%8E) 自由编写处理代码；
 + `access_key` 表示 **身份认证标识** ，`access_sec` 表示 **身份认证密钥**
 + 调用下单接口成功发送配送订单后，系统会返回配送订单单号：`trade_no`，请开发者保存好，用于后续查询和操作订单；
 
