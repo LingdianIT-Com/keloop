@@ -80,7 +80,13 @@ class KeloopCnSdk
     public function authorization($para)
     {
         $path = "/Tp/authorization";
-        return $this->postUrl($path, $para);
+        $url = self::BASE_URL . $path;
+        $data = HTTPRequest::postUrl($url, $para);
+        if (!empty($data)) {
+            return json_decode($data, true);
+        } else {
+            return null;
+        }
     }
 
     /**
