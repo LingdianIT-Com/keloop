@@ -202,7 +202,6 @@ ___
 | `order_photo` |  否  | `string` |  第三方订单图片路径  |
 | `order_price` |  是  | `float` |  第三方订单货物的总价金额，如：9.99  |
 | `platform_name` |  否  | `string` |  第三方订单所属平台名  |
-| `order_number` |  否  | `string` |  第三方订单编号 |
 | `customer_name` |  否  | `string` |  第三方订单中接收客户的名字  |
 | `customer_sex` |  否  | `string` |  第三方订单中接收客户的性别，如：男，女，未知  |
 | `customer_tel` |  否  | `string` |  第三方订单中接收客户的电话  |
