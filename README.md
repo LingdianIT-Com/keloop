@@ -45,7 +45,7 @@ ___
 
 **注：**
 
-+ PHP 开发者可直接获取 [Keloop-PHP-SDK 及 Demo](https://github.com/LingdianIT-Com/keloop/blob/master/src/Keloop-PHP-SDK/KeloopSdk.php)；
++ PHP 开发者可直接获取 [Keloop-PHP-SDK 及 Demo](https://github.com/LingdianIT-Com/keloop/blob/master/src/Keloop-PHP-SDK)；
 + .NET、JAVA 开发者请参考支付宝接口中的 [加签验签 SDK](https://doc.open.alipay.com/doc2/detail?treeId=54&articleId=103419&docType=1) 组装数据生成 **sign**；
 + 开发者也可参考 [签名与验签说明](#签名与验签说明) 自由编写处理代码；
 + `access_key` 表示 **身份认证标识** ，`access_sec` 表示 **身份认证密钥**
