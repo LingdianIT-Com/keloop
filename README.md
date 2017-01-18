@@ -45,7 +45,7 @@ ___
 
 **注：**
 
-+ PHP 开发者可直接获取 [Keloop-PHP-SDK](https://github.com/LingdianIT-Com/keloop/blob/master/src/Keloop-PHP-SDK/KeloopSdk.php)；
++ PHP 开发者可直接获取 [Keloop-PHP-SDK 及 Demo](https://github.com/LingdianIT-Com/keloop/blob/master/src/Keloop-PHP-SDK/KeloopSdk.php)；
 + .NET、JAVA 开发者请参考支付宝接口中的 [加签验签 SDK](https://doc.open.alipay.com/doc2/detail?treeId=54&articleId=103419&docType=1) 组装数据生成 **sign**；
 + 开发者也可参考 [签名与验签说明](#签名与验签说明) 自由编写处理代码；
 + `access_key` 表示 **身份认证标识** ，`access_sec` 表示 **身份认证密钥**
@@ -215,7 +215,7 @@ ___
 | `order_note` |  否  | `string` |  第三方订单备注，如：麻辣一点  |
 | `order_mark` |  否  | `string` |  第三方订单标识  |
 | `order_from` |  否  | `string` |  第三方订单来源 |
-| `order_send` |  否  | `string` |  第三方订单送达时间，如：2016-12-31 23:59:59 |
+| `order_send` |  否  | `string` |  第三方订单送达时间，如：下午六点钟之前送达 |
 | `order_no` |  是  | `string` |  第三方订单单号（唯一） |
 | `order_time` |  否  | `string` |  第三方订单的下单时间，如：2016-12-31 23:59:59 |
 | `order_photo` |  否  | `string` |  第三方订单图片路径  |

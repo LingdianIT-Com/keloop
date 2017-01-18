@@ -13,6 +13,7 @@ class KeloopCnSdk
 {
 
     const BASE_URL = "http://www.keloop.cn/Api";
+    const EXPIRE_TIME = 120;
 
     private $accessKey = "";
     private $accessSec = "";
@@ -39,7 +40,7 @@ class KeloopCnSdk
      */
     public function getUrl($path, $para = array())
     {
-        $para['expire_time'] = time() + 120;
+        $para['expire_time'] = time() + self::EXPIRE_TIME;
         $para['access_key'] = $this->accessKey;
         $sign = Md5Sign::getSign($para, $this->accessSec);
         $para['sign'] = $sign;
@@ -59,7 +60,7 @@ class KeloopCnSdk
      */
     public function postUrl($path, $para = array())
     {
-        $para['expire_time'] = time() + 120;
+        $para['expire_time'] = time() + self::EXPIRE_TIME;
         $para['access_key'] = $this->accessKey;
         $sign = Md5Sign::getSign($para, $this->accessSec);
         $para['sign'] = $sign;
@@ -121,28 +122,62 @@ class KeloopCnSdk
         return $this->postUrl($path, $para);
     }
 
+    /**
+     * 检测 sign 是否正确
+     * @param $param
+     * @return bool
+     */
+    public function checkSign($param)
+    {
+        if (!isset($param['sign'])) {
+            return false;
+        }
+        return Md5Sign::isSignCorrect($param, $this->accessSec, $param['sign']);
+    }
+
 }
 
+/**
+ * 签名类
+ * Class Md5Sign
+ */
 class Md5Sign
 {
 
     /**
      * 获取签名
      * @param array $para 密的参数数组
-     * @param string $encKey 加密的key
+     * @param string $accessSec 加密的key
      * @return bool|string 生产的签名
      */
-    public static function getSign($para, $encKey)
+    public static function getSign($para, $accessSec)
     {
-        if (empty($para) || empty($encKey)) {
+        if (empty($para) || empty($accessSec)) {
             return false;
         }
         //除去待签名参数数组中的空值和签名参数
         $para = self::paraFilter($para);
         $para = self::argSort($para);
         $str = self::createLinkstring($para);
-        $sign = self::md5Verify($str, $encKey);
+        $sign = self::md5Verify($str, $accessSec);
         return $sign;
+    }
+
+    /**
+     * 判断签名是否正确
+     * @param $param
+     * @param $encKey
+     * @param $sign
+     * @return bool
+     */
+    public static function isSignCorrect($param, $encKey, $sign)
+    {
+        if (empty($sign)) {
+            return false;
+        } else {
+            $prestr = self::getSign($param, $encKey);
+            return $prestr === $sign ? true : false;
+        }
     }
 
     /**
@@ -209,6 +244,10 @@ class Md5Sign
 
 }
 
+/**
+ * HTTP 请求类
+ * Class HTTPRequest
+ */
 class HTTPRequest
 {
 
