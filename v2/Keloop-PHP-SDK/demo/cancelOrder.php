@@ -1,7 +1,7 @@
 <?php
 
 /*
- *   Copyright (c) 2012—2016 成都零点信息技术有限公司 All 
+ *   Copyright (c) 2012—2016 成都零点信息技术有限公司 All
  */
 
 /**
@@ -9,6 +9,8 @@
  *
  * @author xuhaha
  */
+
+header("Content-type: text/html; charset=utf-8");
 
 // 引用keloopSDK文件
 require '../KeloopSdk.php';
@@ -23,6 +25,8 @@ $tradeNo = '17011810460100001';
 $para = array(
     'trade_no' => $tradeNo
 );
+// 如果之前使用了 v1 版本的开放接口，生成的 access_key 和开发密钥(dev_secret)未绑定，则进行兼容绑定
+$para['dev_secret'] = 'BSLFRYSD';
 // 创建 SDK 实例
 $sdk = new KeloopCnSdk($accessKey, $accessSec);
 // 调用 cancelOrder 方法
@@ -34,7 +38,7 @@ if (is_null($result)) {
     if ($result['code'] == 200) {
         exit('Success');
     } else {
-        exit($result['message']);
+        exit('错误信息：' . $result['message']);
     }
 } else {
     exit('接口调用异常');

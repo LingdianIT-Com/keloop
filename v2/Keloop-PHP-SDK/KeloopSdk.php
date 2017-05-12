@@ -1,18 +1,18 @@
 <?php
 
 /*
- *   Copyright (c) 2012—2016 成都零点信息技术有限公司 All 
+ *   Copyright (c) 2012—2016 成都零点信息技术有限公司 All
  */
 
 /**
- * 2017 年新版快跑者 SDK
+ * 2017 年新版快跑者 SDK [v2]
  *
- * @author xuhaha
+ * @author xuhaha sxuhaha@gmail.com
  */
 class KeloopCnSdk
 {
 
-    const BASE_URL = "http://www.keloop.cn/Api";
+    const BASE_URL = "http://www.keloop.cn/api/tp2/";
     const EXPIRE_TIME = 120;
 
     private $accessKey = "";
@@ -78,9 +78,9 @@ class KeloopCnSdk
      * @param $para
      * @return mixed|null
      */
-    public function authorization($para)
+    public static function authorization($para)
     {
-        $path = "/Tp/authorization";
+        $path = "authorization";
         $url = self::BASE_URL . $path;
         $data = HTTPRequest::postUrl($url, $para);
         if (!empty($data)) {
@@ -97,7 +97,7 @@ class KeloopCnSdk
      */
     public function createOrder($para)
     {
-        $path = "/Tp/createOrder";
+        $path = "createOrder";
         return $this->postUrl($path, $para);
     }
 
@@ -105,10 +105,10 @@ class KeloopCnSdk
      * 获取快跑者商户关联的配送团队及成员
      * @return boolean
      */
-    public function getTeamMember()
+    public function getTeamMembers($para)
     {
-        $path = "/Tp/getTeamMember";
-        return $this->getUrl($path);
+        $path = "getTeamMembers";
+        return $this->getUrl($path, $para);
     }
 
     /**
@@ -118,7 +118,7 @@ class KeloopCnSdk
      */
     public function cancelOrder($para)
     {
-        $path = "/Tp/cancelOrder";
+        $path = "cancelOrder";
         return $this->postUrl($path, $para);
     }
 

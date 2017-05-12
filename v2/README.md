@@ -175,12 +175,12 @@ ___
             "group": [],
             "courier": [
                 {
-                    "user_id": 1,
-                    "user_name": "德莱厄斯12"
+                    "courier_id": 1,
+                    "courier_name": "德莱厄斯12"
                 },
                 {
-                    "user_id": 20,
-                    "user_name": "田丰"
+                    "courier_id": 20,
+                    "courier_name": "田丰"
                 }
             ]
         },
@@ -201,12 +201,12 @@ ___
             ],
             "courier": [
                 {
-                    "user_id": 1,
-                    "user_name": "德莱厄斯12"
+                    "courier_id": 1,
+                    "courier_name": "德莱厄斯12"
                 },
                 {
-                    "user_id": 2,
-                    "user_name": "长得帅2号"
+                    "courier_id": 2,
+                    "courier_name": "长得帅2号"
                 }
             ]
         },
@@ -223,12 +223,12 @@ ___
             ],
             "courier": [
                 {
-                    "user_id": 2,
-                    "user_name": "长得帅2号"
+                    "courier_id": 2,
+                    "courier_name": "长得帅2号"
                 },
                 {
-                    "user_id": 20,
-                    "user_name": "田丰"
+                    "courier_id": 20,
+                    "courier_name": "田丰"
                 }
             ]
         }
@@ -253,8 +253,8 @@ ___
 | `group` | `array` |  对应配送团队下的配送群的信息  |
 | `team_id` | `int` |  商户合作的配送团队 ID  |
 | `team_name` | `string` |  商户合作的配送团队名称  |
-| `user_id` | `int` |  配送团队下的配送员 ID |
-| `user_name` | `string` |  配送团队下的配送员名称  |
+| `courier_id` | `int` |  配送团队下的配送员 ID |
+| `courier_name` | `string` |  配送团队下的配送员名称  |
 | `group_id` | `int` |  配送团队下的配送群 ID  |
 | `group_name` | `string` |  配送团队下的配送群名称  |
 
@@ -370,7 +370,7 @@ ___
 
 略
 
-## 查看订单接口
+## 查看配送订单接口
 
 **简要描述：**开发者可根据配送订单单号拼接一个固定格式的 url 地址并访问配送订单信息及订单状态。
 

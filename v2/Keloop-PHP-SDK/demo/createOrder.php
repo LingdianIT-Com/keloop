@@ -1,7 +1,7 @@
 <?php
 
 /*
- *   Copyright (c) 2012—2016 成都零点信息技术有限公司 All 
+ *   Copyright (c) 2012—2016 成都零点信息技术有限公司 All
  */
 
 /**
@@ -9,6 +9,8 @@
  *
  * @author xuhaha
  */
+
+header("Content-type: text/html; charset=utf-8");
 
 // 引用keloopSDK文件
 require '../KeloopSdk.php';
@@ -27,7 +29,6 @@ $para = array(
     'order_time' => '2016-12-31 23:59:59',
     'order_photo' => 'http://a4.att.hudong.com/38/47/19300001391844134804474917734_950.png',
     'order_price' => 99.99,
-    'platform_name' => '三餐美食',
 
     'customer_name' => '郝美丽',
     'customer_tel' => '18288888888',
@@ -36,15 +37,14 @@ $para = array(
     'customer_sex' => '男',
 
     'pay_status' => 1,
-    'notify_url' => 'http://www.xxxx.com/keloopNotify',
-
     'pay_type' => 1,
     'pay_fee' => 6.66,
-    'pay_success' => 1,
 
     'team_id' => 4,
     'group_id' => 185
 );
+// 如果之前使用了 v1 版本的开放接口，生成的 access_key 和开发密钥(dev_secret)未绑定，则进行兼容绑定
+$para['dev_secret'] = 'BSLFRYSD';
 // 创建 SDK 实例
 $sdk = new KeloopCnSdk($accessKey, $accessSec);
 // 调用 createOrder 方法
@@ -59,7 +59,7 @@ if (is_null($result)) {
         var_dump($tradeNo);
         exit('Success');
     } else {
-        exit($result['message']);
+        exit('错误信息：' . $result['message']);
     }
 } else {
     exit('接口调用异常');

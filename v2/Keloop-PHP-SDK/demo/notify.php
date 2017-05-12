@@ -1,7 +1,7 @@
 <?php
 
 /*
- *   Copyright (c) 2012—2016 成都零点信息技术有限公司 All 
+ *   Copyright (c) 2012—2016 成都零点信息技术有限公司 All
  */
 
 /**
@@ -9,6 +9,8 @@
  *
  * @author xuhaha
  */
+
+header("Content-type: text/html; charset=utf-8");
 
 // 引用keloopSDK文件
 require '../KeloopSdk.php';

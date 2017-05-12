@@ -1,7 +1,7 @@
 <?php
 
 /*
- *   Copyright (c) 2012—2016 成都零点信息技术有限公司 All 
+ *   Copyright (c) 2012—2016 成都零点信息技术有限公司 All
  */
 
 /**
@@ -10,6 +10,8 @@
  * @author xuhaha
  */
 
+header("Content-type: text/html; charset=utf-8");
+
 // 引用keloopSDK文件
 require '../KeloopSdk.php';
 
@@ -17,21 +19,22 @@ require '../KeloopSdk.php';
 $tel = '18280094727';
 // 快跑者商户的密码
 $password = '123456';
+// 开发密钥
+$devSecret = 'BSLFRYSD';
 // 描述信息
-$note = '三餐美食 - 兰州拉面';
+$note = '兰州拉面店';
 // 封装参数
 $para = array(
     'tel' => $tel,
     'password' => $password,
+    'dev_secret' => $devSecret,
     'note' => $note
 );
-// 创建 SDK 实例（注意：这儿传入的 $tel 和 $password 参数仅是避免实例化对象时报错，没任何实际意义，也可使用任意字符串代替）
-$sdk = new KeloopCnSdk($tel, $password);
 // 调用 authorization 方法
-$result = $sdk->authorization($para);
+$result = KeloopCnSdk::authorization($para);
 // 业务逻辑处理
 if (is_null($result)) {
-    exit('身份认证接口异常');
+    exit('商户身份认证接口调用异常');
 } else if (is_array($result)) {
     if ($result['code'] == 200) {
         $data = array(
@@ -42,7 +45,7 @@ if (is_null($result)) {
         var_dump($data);
         exit('Success');
     } else {
-        exit($result['message']);
+        exit('错误信息：' . $result['message']);
     }
 } else {
     exit('接口调用异常');
