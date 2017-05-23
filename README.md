@@ -354,15 +354,24 @@ ___
 
 ### 请求参数签名
 
+以下将展示一个简单示例，其中身份标识和密钥如下：
+
+```
+{
+    "access_key": "08E7HSLI",
+    "access_sec": "QF6702gZ"
+}
+```
+
 #### 1. 参数筛选
-获取所有请求参数（不包括字节类型参数，如文件、字节流），剔除参数名为 sign、sign_type、key 的参数及参数值为 '' 或 null 的参数。
+获取所有请求参数（不包括字节类型参数，如文件、字节流），剔除参数名为 sign、sign_type、key 的参数及参数值为 '' 或 null 的参数（注意：请不要带上 access_sec 参数）。
 以获取配送团队接口为例，需要请求的参数有：
 
 ```
 {
     "sign": "", 
-    "expire_time": 1477483702,
-    "access_key": "JNLHPRC5"
+    "expire_time": 1495527742,
+    "access_key": "08E7HSLI"
 }
 ```
 
@@ -370,8 +379,8 @@ ___
 
 ```
 {
-    "expire_time": 1477483702,
-    "access_key": "JNLHPRC5"
+    "expire_time": 1495527742,
+    "access_key": "08E7HSLI"
 }
 ```
 
@@ -382,8 +391,8 @@ ___
 
 ```
 {
-    "access_key": "JNLHPRC5",
-    "expire_time": 1477483702
+    "access_key": "08E7HSLI",
+    "expire_time": 1495527742
 }
 ```
 
@@ -393,13 +402,19 @@ ___
 经过参数拼接之后的字符串为：
 
 ```
-access_key=JNLHPRC5&expire_time=1477483702
+access_key=08E7HSLI&expire_time=1495527742
 ```
 
 #### 4. 签名
 使用各自语言对应的 SHA1 With RSA 签名函数（如 PHP 的签名函数是 md5()）利用商户私钥对待签名字符串进行签名。
 
-PHP 的签名方法为：将第三步参数拼接得到的字符串和 access_sec 值拼接起来再进行 MD5 加密，加密后的字符串即为 sign 值。
+PHP 的签名方法为：将第三步参数拼接得到的字符串和 access_sec 值拼接起来再进行 MD5 加密，加密后的字符串即为 sign 值：
+
+```
+md5('access_key=08E7HSLI&expire_time=1495527742QF6702gZ')
+```
+
+最终结果为：9161c3958bed7794faf66d85a95cc8ae
 
 ### 返回参数验证签名
 
