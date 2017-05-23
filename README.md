@@ -406,12 +406,10 @@ access_key=08E7HSLI&expire_time=1495527742
 ```
 
 #### 4. 签名
-使用各自语言对应的 SHA1 With RSA 签名函数（如 PHP 的签名函数是 md5()）利用商户私钥对待签名字符串进行签名。
-
-PHP 的签名方法为：将第三步参数拼接得到的字符串和 access_sec 值拼接起来再进行 MD5 加密，加密后的字符串即为 sign 值：
+将第三步参数拼接得到的字符串和 access_sec 值拼接起来再进行 MD5 加密，加密后的字符串即为 sign 值：
 
 ```
-md5('access_key=08E7HSLI&expire_time=1495527742QF6702gZ')
+md5('access_key=08E7HSLI&expire_time=1495527742' . 'QF6702gZ')
 ```
 
 最终结果为：9161c3958bed7794faf66d85a95cc8ae
