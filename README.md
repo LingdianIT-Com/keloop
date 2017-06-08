@@ -2,7 +2,7 @@
 
 > 快跑者开放接口对接讨论 QQ 群：438529770
 
-## 快跑者开放接口文档 v2 版本
+## 快跑者开放接口 v2 版本说明文档
 
 文档地址：https://github.com/LingdianIT-Com/keloop/tree/master/v2
 
@@ -21,7 +21,7 @@
 - v2 版本和 v1 版本的开放接口互不兼容，因此如果从 v1 版本升级到 v2 版本，需要重新对接
 - v2 版本的开放接口对 v1 版本生成的 `access_key` 和 `access_sec` 数据做了兼容处理，因此不用担心数据兼容问题
 
-## 快跑者开放接口文档 v1 版本
+## 快跑者开放接口 v1 版本说明文档
 
 文档地址：https://github.com/LingdianIT-Com/keloop/tree/master/v1
 

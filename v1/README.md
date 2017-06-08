@@ -1,7 +1,6 @@
-# 快跑者接口文档
+# 快跑者开放接口 v1 版本说明文档
 
-------
-
+- [前言](#前言)
 - [接口简介](#接口简介)
 - [接口说明](#接口说明)
 - [账号认证接口](#账号认证接口)
@@ -19,6 +18,12 @@
     + [返回参数验证签名](#返回参数验证签名)
     + [获取配送团队信息接口2](#获取配送团队信息接口2)
 
+## 前言
+
+快跑者开放接口已升级至 v2 版本，本文档将不再更新，v1 版本的开放接口将维护至 2917 年 12 月 31 日，请开发者尽快迁移至 v2 版本。
+
+> 快跑者开放接口对接讨论 QQ 群：438529770
+    
 ## 接口简介
 
 本文档系新版快跑者（2017 年版）第三方开放接口文档，任何快跑者商户都拥有快跑者第三方开放接口调用权限！
@@ -46,10 +51,12 @@ ___
 
 **注：**
 
-+ PHP 开发者可直接获取 [Keloop-PHP-SDK 及 Demo](https://github.com/LingdianIT-Com/keloop/blob/master/src/Keloop-PHP-SDK)；
-+ .NET、JAVA 开发者请参考支付宝接口中的 [加签验签 SDK](https://doc.open.alipay.com/doc2/detail?treeId=54&articleId=103419&docType=1) 组装数据生成 **sign**；
++ PHP 开发者可直接获取 [Keloop-PHP-SDK 及 Demo](https://github.com/LingdianIT-Com/keloop/tree/master/v1/Keloop-PHP-SDK)；
+
 + 开发者也可参考 [签名与验签说明](#签名与验签说明) 自由编写处理代码；
+
 + `access_key` 表示 **身份认证标识** ，`access_sec` 表示 **身份认证密钥**
+
 + 调用下单接口成功发送配送订单后，系统会返回配送订单单号：`trade_no`，请开发者保存好，用于后续查询和操作订单；
 
 ## 账号认证接口
@@ -329,7 +336,7 @@ ___
 ```
 {
     "code": 204, 
-    "message": "只有待发单、待抢单和待取单的订单才可被撤销", 
+    "message": "只有待发单、待抢单和待接单的订单才可被撤销", 
     "data": [ ]
 }
 ```
@@ -348,9 +355,7 @@ ___
 
 ## 附：签名与验签说明
 
-快跑者开放接口的签名与验签方式借鉴了支付宝接口的签名流程：[支付宝签名流程](https://doc.open.alipay.com/doc2/detail.htm?treeId=200&articleId=105351&docType=1)，因此，PHP、JAVA、C、C++、C# 开放者均可借鉴 [支付宝服务端 SDK](https://doc.open.alipay.com/doc2/detail?treeId=54&articleId=103419&docType=1#s4)。
-
-如果开发者不用 SDK，可根据签名规则自己拼写签名方法，具体的签名流程如下：
+PHP 开发者可直接使用或借鉴快跑者 [Keloop-PHP-SDK](https://github.com/LingdianIT-Com/keloop/tree/master/v1/Keloop-PHP-SDK)，其他语言开发者可根据以下签名规则自己编写签名方法，具体的签名流程如下：
 
 ### 请求参数签名
 
