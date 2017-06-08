@@ -1,7 +1,7 @@
 <?php
 
 /*
- *   Copyright (c) 2012—2016 成都零点信息技术有限公司 All
+ *   Copyright (c) 2012—2017 成都零点信息技术有限公司 All
  */
 
 /**
@@ -9,7 +9,7 @@
  *
  * @author xuhaha sxuhaha@gmail.com
  */
-class KeloopCnSdk
+class KeloopCnSdk2
 {
 
     const BASE_URL = "http://www.keloop.cn/api/tp2/";
@@ -34,46 +34,6 @@ class KeloopCnSdk
     }
 
     /**
-     * @param $path
-     * @param array $para
-     * @return mixed|null
-     */
-    public function getUrl($path, $para = array())
-    {
-        $para['expire_time'] = time() + self::EXPIRE_TIME;
-        $para['access_key'] = $this->accessKey;
-        $sign = Md5Sign::getSign($para, $this->accessSec);
-        $para['sign'] = $sign;
-        $url = self::BASE_URL . $path;
-        $data = HTTPRequest::getUrl($url, $para);
-        if (!empty($data)) {
-            return json_decode($data, true);
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     * @param $path
-     * @param array $para
-     * @return mixed|null
-     */
-    public function postUrl($path, $para = array())
-    {
-        $para['expire_time'] = time() + self::EXPIRE_TIME;
-        $para['access_key'] = $this->accessKey;
-        $sign = Md5Sign::getSign($para, $this->accessSec);
-        $para['sign'] = $sign;
-        $url = self::BASE_URL . $path;
-        $data = HTTPRequest::postUrl($url, $para);
-        if (!empty($data)) {
-            return json_decode($data, true);
-        } else {
-            return null;
-        }
-    }
-
-    /**
      * 账号认证
      * @param $para
      * @return mixed|null
@@ -91,6 +51,17 @@ class KeloopCnSdk
     }
 
     /**
+     * 获取快跑者商户关联的配送团队及成员
+     * @param $para
+     * @return mixed|null
+     */
+    public function getTeamMembers($para)
+    {
+        $path = "getTeamMembers";
+        return $this->getUrl($path, $para);
+    }
+
+    /**
      * 向绑定的配送站发送订单
      * @param $para
      * @return mixed|null
@@ -102,12 +73,35 @@ class KeloopCnSdk
     }
 
     /**
-     * 获取快跑者商户关联的配送团队及成员
-     * @return boolean
+     * 获取订单信息
+     * @param $para
+     * @return mixed|null
      */
-    public function getTeamMembers($para)
+    public function getOrderInfo($para)
     {
-        $path = "getTeamMembers";
+        $path = "getOrderInfo";
+        return $this->getUrl($path, $para);
+    }
+
+    /**
+     * 获取订单进程
+     * @param $para
+     * @return mixed|null
+     */
+    public function getOrderLog($para)
+    {
+        $path = "getOrderLog";
+        return $this->getUrl($path, $para);
+    }
+
+    /**
+     * 获取配送员最新坐标
+     * @param $para
+     * @return mixed|null
+     */
+    public function getCourierTag($para)
+    {
+        $path = "getCourierTag";
         return $this->getUrl($path, $para);
     }
 
@@ -135,6 +129,46 @@ class KeloopCnSdk
         return Md5Sign::isSignCorrect($param, $this->accessSec, $param['sign']);
     }
 
+    /**
+     * @param $path
+     * @param array $para
+     * @return mixed|null
+     */
+    private function getUrl($path, $para = array())
+    {
+        $para['expire_time'] = time() + self::EXPIRE_TIME;
+        $para['access_key'] = $this->accessKey;
+        $sign = Md5Sign::getSign($para, $this->accessSec);
+        $para['sign'] = $sign;
+        $url = self::BASE_URL . $path;
+        $data = HTTPRequest::getUrl($url, $para);
+        if (!empty($data)) {
+            return json_decode($data, true);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * @param $path
+     * @param array $para
+     * @return mixed|null
+     */
+    private function postUrl($path, $para = array())
+    {
+        $para['expire_time'] = time() + self::EXPIRE_TIME;
+        $para['access_key'] = $this->accessKey;
+        $sign = Md5Sign::getSign($para, $this->accessSec);
+        $para['sign'] = $sign;
+        $url = self::BASE_URL . $path;
+        $data = HTTPRequest::postUrl($url, $para);
+        if (!empty($data)) {
+            return json_decode($data, true);
+        } else {
+            return null;
+        }
+    }
+
 }
 
 /**
@@ -143,7 +177,6 @@ class KeloopCnSdk
  */
 class Md5Sign
 {
-
     /**
      * 获取签名
      * @param array $para 密的参数数组
@@ -303,8 +336,8 @@ class HTTPRequest
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        $resposne = curl_exec($ch);
-        return $resposne;
+        $response = curl_exec($ch);
+        return $response;
     }
 
     /**

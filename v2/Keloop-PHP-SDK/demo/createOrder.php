@@ -13,19 +13,20 @@
 header("Content-type: text/html; charset=utf-8");
 
 // 引用keloopSDK文件
-require '../KeloopSdk.php';
+require '../KeloopSdk2.php';
 
 // TODO:: 从数据库中获取 access_key 和 access_sec，下面直接定义两个变量
-$accessKey = '600FKO6O';
-$accessSec = '1PXUKW65';
+$accessKey = 'K6GQF8N8';
+$accessSec = 'Z0AX4ZHH';
 // 封装参数
 $para = array(
+    'note' => 'great',
     'order_content' => '1份烧白开(100x1),1份拉面(18x1)',
     'order_note' => '不要太辣了',
     'order_mark' => '外卖订单',
     'order_from' => '三餐美食 - 兰州拉面',
     'order_send' => '下午六点钟之前送达',
-    'order_no' => '12153546',
+    'order_no' => '12153154',
     'order_time' => '2016-12-31 23:59:59',
     'order_photo' => 'http://a4.att.hudong.com/38/47/19300001391844134804474917734_950.png',
     'order_price' => 99.99,
@@ -37,16 +38,16 @@ $para = array(
     'customer_sex' => '男',
 
     'pay_status' => 1,
-    'pay_type' => 1,
+    'pay_type' => 2,
     'pay_fee' => 6.66,
 
-    'team_id' => 4,
-    'group_id' => 185
+    'team_id' => 1,
+    'group_id' => 1
 );
 // 如果之前使用了 v1 版本的开放接口，生成的 access_key 和开发密钥(dev_secret)未绑定，则进行兼容绑定
-$para['dev_secret'] = 'BSLFRYSD';
+$para['dev_secret'] = '9LIYXQ2PTKSZNGUJHHESXP7V1COHY2TW';
 // 创建 SDK 实例
-$sdk = new KeloopCnSdk($accessKey, $accessSec);
+$sdk = new KeloopCnSdk2($accessKey, $accessSec);
 // 调用 createOrder 方法
 $result = $sdk->createOrder($para);
 // 业务逻辑处理
@@ -57,7 +58,7 @@ if (is_null($result)) {
         $tradeNo = $result['data']['trade_no'];
         // TODO:: 将 $tradeNo 保存到数据库中，以待以后使用
         var_dump($tradeNo);
-        exit('Success');
+        exit('success');
     } else {
         exit('错误信息：' . $result['message']);
     }

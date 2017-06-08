@@ -13,7 +13,7 @@
 header("Content-type: text/html; charset=utf-8");
 
 // 引用keloopSDK文件
-require '../KeloopSdk.php';
+require '../KeloopSdk2.php';
 
 // 获取 post 数据
 $para = $_POST;
@@ -24,14 +24,14 @@ if (!$accessKey = $para['access_key']) {
     exit('access_key 不存在');
 }
 // TODO::根据 $accessKey 获取保存在你的数据库中对应的 access_sec，下面直接定义 $accessSec 变量
-$accessSec = '1PXUKW65';
+$accessSec = 'Z0AX4ZHH';
 
 // 创建 SDK 实例
-$sdk = new KeloopCnSdk($accessKey, $accessSec);
+$sdk = new KeloopCnSdk2($accessKey, $accessSec);
 // 调用 cancelOrder 方法
 if ($sdk->checkSign($para)) {
     exit('验签失败');
 }
 // TODO:: 进行业务操作
 var_dump($para);
-exit('Success');
+exit('success');

@@ -13,25 +13,25 @@
 header("Content-type: text/html; charset=utf-8");
 
 // 引用keloopSDK文件
-require '../KeloopSdk.php';
+require '../KeloopSdk2.php';
 
 // 快跑者商户的手机账号
 $tel = '18280094727';
 // 快跑者商户的密码
 $password = '123456';
 // 开发密钥
-$devSecret = 'BSLFRYSD';
+$devSecret = '9LIYXQ2PTKSZNGUJHHESXP7V1COHY2TW';
 // 描述信息
-$note = '兰州拉面店';
+$note = '三餐美食 - 兰州拉面店';
 // 封装参数
-$para = array(
+$param = array(
     'tel' => $tel,
     'password' => $password,
     'dev_secret' => $devSecret,
     'note' => $note
 );
 // 调用 authorization 方法
-$result = KeloopCnSdk::authorization($para);
+$result = KeloopCnSdk2::authorization($param);
 // 业务逻辑处理
 if (is_null($result)) {
     exit('商户身份认证接口调用异常');
@@ -43,7 +43,7 @@ if (is_null($result)) {
         );
         // TODO:: 将 $data 保存到数据库中！！！
         var_dump($data);
-        exit('Success');
+        exit('success');
     } else {
         exit('错误信息：' . $result['message']);
     }
