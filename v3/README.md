@@ -31,7 +31,7 @@
 
 1. 在快跑者 [开发者中心](http://www.keloop.cn/home/open/index) 注册开发者账号，编辑开发者相关信息，并绑定微信（申请通过会通过微信进行通知） 申请**开发密钥**和**签名秘钥**，申请通过后即可进行开发；
 
-2. 在快跑者 团队后台 注册团队账号
+2. 在快跑者 团队后台 注册团队账号获取team_token
 
 3. 调用 v3 发单接口向快跑者发送订单（必填参数必须填写）
 
@@ -143,8 +143,7 @@ ___
 | `pay_status` |  否  | `int` | `0` |  订单支付方式：0 表示已支付、1 表示货到付款  |
 | `pay_type` |  否  | `int` | `3` |  配送订单费用的支付方式，1 表示在线支付，2 表示事后结算，3 表示储备金支付，当团队未设置本商户的储值模式或无法计算配送费时，自动修改为事后结算,当订单发往商户时，同时team_id也为空，自动修改为事后结算 |
 | `pay_fee` |  否  | `float` | `0.00` |  配送订单的配送费用  |
-| `receipt_type` |  是  | `int` | `1` |  配送订单发放团队或者发往商户，1表示发往商户，2表示发往团队调度  |
-| `team_id` |  是  | `int` | `0` |  配送订单指定的配送团队 ID，若为 0 则表示将订单发送到快跑者商户端  |
+| `team_token` |  是  | `string` | `无` |  配送订单指定的配送团队 ID的token，唯一标识  |
 
 
 **备注：**
@@ -155,8 +154,7 @@ ___
 
 **v3 版本和 v2 版本的差异：** 
 
-- 添加了merchants_address,merchants_tag,merchants_name,merchants_tel字段，明确了下单时发往的团队team_id（取消直接发往群和指定配送员），首次下单快跑者根据merchants_id及传入的商户信息创建快跑者商户，每个第三方商户对应一个快跑者商户。
-- 当第二次传入相同的merchants_id，但是merchants_address,merchants_tag,merchants_name,merchants_tel不同，表示更新该商户数据
+- 添加了merchants_address,merchants_tag,merchants_name,merchants_tel字段，明确了下单时发往的团队（利用唯一标识team_token获取团队信息），取消直接发往群和指定配送员
 **返回示例**
 
 - 调用成功示例
