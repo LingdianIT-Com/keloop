@@ -15,8 +15,8 @@ class KeloopCnSdk3
     const BASE_URL = "http://www.keloop.cn/api/tp3/";
     const EXPIRE_TIME = 120;
 
-    private $apikey = "";
-    private $apiSecret = "";
+    private $devKey = "";
+    private $devSecret = "";
 
     /**
      * KeloopCnSdk constructor.
@@ -27,38 +27,10 @@ class KeloopCnSdk3
     function __construct($key, $sec)
     {
         if (empty($key) || empty($sec)) {
-            throw new Exception("身份认证标识(apikey)与身份认证密钥(apiSecret)不能为空");
+            throw new Exception("dev_key 和 dev_secret 参数不能为空");
         }
-        $this->apikey = $key;
-        $this->apiSecret = $sec;
-    }
-
-    /**
-     * 账号认证
-     * @param $para
-     * @return mixed|null
-     */
-    public static function authorization($para)
-    {
-        $path = "authorization";
-        $url = self::BASE_URL . $path;
-        $data = HTTPRequest::postUrl($url, $para);
-        if (!empty($data)) {
-            return json_decode($data, true);
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     * 获取快跑者商户关联的配送团队及成员
-     * @param $para
-     * @return mixed|null
-     */
-    public function getTeamMembers($para)
-    {
-        $path = "getTeamMembers";
-        return $this->getUrl($path, $para);
+        $this->devKey = $key;
+        $this->devSecret = $sec;
     }
 
     /**
@@ -70,6 +42,17 @@ class KeloopCnSdk3
     {
         $path = "createOrder";
         return $this->postUrl($path, $para);
+    }
+
+    /**
+     * 获取快跑者商户关联的配送团队及成员
+     * @param $para
+     * @return mixed|null
+     */
+    public function getTeamMembers($para)
+    {
+        $path = "getTeamMembers";
+        return $this->getUrl($path, $para);
     }
 
     /**
@@ -126,7 +109,7 @@ class KeloopCnSdk3
         if (!isset($param['sign'])) {
             return false;
         }
-        return Md5Sign::isSignCorrect($param, $this->apiSecret, $param['sign']);
+        return Md5Sign::isSignCorrect($param, $this->devSecret, $param['sign']);
     }
 
     /**
@@ -137,8 +120,8 @@ class KeloopCnSdk3
     private function getUrl($path, $para = array())
     {
         $para['expire_time'] = time() + self::EXPIRE_TIME;
-        $para['apikey'] = $this->apikey;
-        $sign = Md5Sign::getSign($para, $this->apiSecret);
+        $para['dev_key'] = $this->devKey;
+        $sign = Md5Sign::getSign($para, $this->devSecret);
         $para['sign'] = $sign;
         $url = self::BASE_URL . $path;
         $data = HTTPRequest::getUrl($url, $para);
@@ -156,9 +139,10 @@ class KeloopCnSdk3
      */
     private function postUrl($path, $para = array())
     {
-        $para['expire_time'] = time() + self::EXPIRE_TIME;
-        $para['apikey'] = $this->apikey;
-        $sign = Md5Sign::getSign($para, $this->apiSecret);
+        // $para['expire_time'] = time() + self::EXPIRE_TIME;
+        $para['expire_time'] = strtotime('2020-02-22 22:22:22');
+        $para['dev_key'] = $this->devKey;
+        $sign = Md5Sign::getSign($para, $this->devSecret);
         $para['sign'] = $sign;
         $url = self::BASE_URL . $path;
         $data = HTTPRequest::postUrl($url, $para);
@@ -180,19 +164,19 @@ class Md5Sign
     /**
      * 获取签名
      * @param array $para 密的参数数组
-     * @param string $apiSecret 加密的key
+     * @param string $devSecret 加密的key
      * @return bool|string 生产的签名
      */
-    public static function getSign($para, $apiSecret)
+    public static function getSign($para, $devSecret)
     {
-        if (empty($para) || empty($apiSecret)) {
+        if (empty($para) || empty($devSecret)) {
             return false;
         }
         //除去待签名参数数组中的空值和签名参数
         $para = self::paraFilter($para);
         $para = self::argSort($para);
         $str = self::createLinkstring($para);
-        $sign = self::md5Verify($str, $apiSecret);
+        $sign = self::md5Verify($str, $devSecret);
         return $sign;
     }
 
