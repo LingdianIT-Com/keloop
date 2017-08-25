@@ -37,6 +37,13 @@ $para = array(
     'customer_tag' => '104.081909,30.779741',
     'customer_sex' => '男',
 
+    'merchant_id' => 22,
+    'team_token' => 'APTKSZNGUJHHESXP',
+    'merchant_address' => '天府广场',
+    'merchant_tag' => '104.011751,30.7142',
+    'merchant_tel' => '136****9068',
+    'merchant_name' => '张三',
+
     'pay_status' => 1,
     'pay_type' => 2,
     'pay_fee' => 6.66,
