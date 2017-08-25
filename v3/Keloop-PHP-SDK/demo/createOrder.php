@@ -37,12 +37,16 @@ $para = array(
     'customer_tag' => '104.081909,30.779741',
     'customer_sex' => '男',
 
+    'merchant_id' => 22,
+    'team_token' => 'APTKSZNGUJHHESXP',
+    'merchant_address' => '天府广场',
+    'merchant_tag' => '104.011751,30.7142',
+    'merchant_tel' => '136****9068',
+    'merchant_name' => '张三',
+
     'pay_status' => 1,
     'pay_type' => 2,
     'pay_fee' => 6.66,
-
-    'team_id' => 1,
-    'group_id' => 1
 );
 // 如果之前使用了 v1 版本的开放接口，生成的 apikey 和开发密钥(dev_secret)未绑定，则进行兼容绑定
 $para['dev_secret'] = '9LIYXQ2PTKSZNGUJHHESXP7V1COHY2TW';
