@@ -45,17 +45,6 @@ class KeloopCnSdk3
     }
 
     /**
-     * 获取快跑者商户关联的配送团队及成员
-     * @param $para
-     * @return mixed|null
-     */
-    public function getTeamMembers($para)
-    {
-        $path = "getTeamMembers";
-        return $this->getUrl($path, $para);
-    }
-
-    /**
      * 获取订单信息
      * @param $para
      * @return mixed|null
@@ -139,8 +128,7 @@ class KeloopCnSdk3
      */
     private function postUrl($path, $para = array())
     {
-        // $para['expire_time'] = time() + self::EXPIRE_TIME;
-        $para['expire_time'] = strtotime('2020-02-22 22:22:22');
+        $para['expire_time'] = time() + self::EXPIRE_TIME;
         $para['dev_key'] = $this->devKey;
         $sign = Md5Sign::getSign($para, $this->devSecret);
         $para['sign'] = $sign;
