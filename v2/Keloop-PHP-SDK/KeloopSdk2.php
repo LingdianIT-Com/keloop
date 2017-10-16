@@ -62,6 +62,17 @@ class KeloopCnSdk2
     }
 
     /**
+     * 获取商户配送费
+     * @param $para
+     * @return mixed|null
+     */
+    public function getFee($para)
+    {
+        $path = "getFee";
+        return $this->getUrl($path, $para);
+    }
+
+    /**
      * 向绑定的配送站发送订单
      * @param $para
      * @return mixed|null
