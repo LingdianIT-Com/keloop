@@ -386,9 +386,9 @@ ___
 
 ## 获取订单配送费接口
 
-**简要描述：**开发者可调用本接口获取订单的配送费。
+**简要描述：** 开发者可调用本接口获取订单的配送费。
 
-**请求 URL：** `http://www.keloop.cn/Api/Tp/getFee`
+**请求 URL：** `http://www.keloop.cn/api/tp2/getFee`
 
 **请求方式：** POST
 
