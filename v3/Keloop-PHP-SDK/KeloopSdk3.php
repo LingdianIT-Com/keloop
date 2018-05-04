@@ -89,6 +89,17 @@ class KeloopCnSdk3
     }
 
     /**
+     * 评论订单
+     * @param $para
+     * @return mixed|null
+     */
+    public function commentOrder($para)
+    {
+        $path = "commentOrder";
+        return $this->postUrl($path, $para);
+    }
+
+    /**
      * 检测 sign 是否正确
      * @param $param
      * @return bool
