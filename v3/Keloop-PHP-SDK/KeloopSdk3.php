@@ -20,17 +20,17 @@ class KeloopCnSdk3
 
     /**
      * KeloopCnSdk constructor.
-     * @param $key
-     * @param $sec
+     * @param $devKey
+     * @param $devSecret
      * @throws Exception
      */
-    function __construct($key, $sec)
+    function __construct($devKey, $devSecret, $teamToken)
     {
-        if (empty($key) || empty($sec)) {
+        if (empty($devKey) || empty($devSecret)) {
             throw new Exception("dev_key 和 dev_secret 参数不能为空");
         }
-        $this->devKey = $key;
-        $this->devSecret = $sec;
+        $this->devKey = $devKey;
+        $this->devSecret = $devSecret;
     }
 
     /**
